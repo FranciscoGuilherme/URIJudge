@@ -1,13 +1,42 @@
+include environment.mk
+
+#---------------------------------------------------
+# HIDING THE GCC COMPILATION
+#---------------------------------------------------
+
+MAKEFLAGS += --quiet
+
+#---------------------------------------------------
+# CONFIGURING DEPENDENCES
+#---------------------------------------------------
+
+CPPUTEST_INCLUDES  := -pthread -I/usr/include/CppUTest/* -I/usr/include/CppUTestExt/*
+CPPUTEST_LIBRARIES := $(shell pkg-config --libs cpputest)
+
 #---------------------------------------------------
 # GNUCC PARAMETERS
 #---------------------------------------------------
 
-CFLAGS := -Wall -g -Wextra
-BINARY := ../bin/1001
+CFLAGS   :=  -Wall -g $(CPPUTEST_INCLUDES)
+LDFLAGS  := $(CPPUTEST_LIBRARIES)
+
+#---------------------------------------------------
+# OTHER PARAMETERS
+#---------------------------------------------------
+
+BINARY   := $(BINARY_DIR)/MVC
+TEST_BIN := $(BINARY_DIR)/TESTS
 
 #---------------------------------------------------
 # SOURCE FILES (*.c, *.o)
 #---------------------------------------------------
 
-SOURCES := $(wildcard ../src/**/*.c ../src/*.c)
+SOURCES := $(wildcard $(SOURCE_DIR)/**/*.c $(SOURCE_DIR)/*.c)
 OBJECTS := $(patsubst %.c, %.o, $(SOURCES))
+
+#---------------------------------------------------
+# TESTS FILES (*.c, *.o)
+#---------------------------------------------------
+
+TESTS_SOURCES := $(wildcard $(TESTS_DIR)/**/*.cpp $(TESTS_DIR)/*.cpp $(SOURCE_DIR)/main.c)
+TESTS_OBJECTS := $(patsubst %.cpp, %.o, $(TESTS_SOURCES))

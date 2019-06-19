@@ -16,7 +16,10 @@ SUPPRESS_WARN = 2> /dev/null
 #      1.5. build.program.report
 #      1.6. performance.analysis
 #      1.7. build.program.final.configuration
-#      1.8. clean
+#      1.8. build.tests
+#      1.9. build.tests.executable
+#      1.10. build.tests.final.configuration
+#      1.11. clean
 #
 #===================================================
 
@@ -29,9 +32,10 @@ build.program: build.program.report build.program.final.configuration performanc
 build.program.initial: build.program.sckeleton $(OBJECTS)
 
 build.program.sckeleton:
-	@mkdir $(OBJECT_DIR)
-	@mkdir $(REPORT_DIR)
 	@mkdir $(BINARY_DIR)
+	@mkdir $(REPORT_DIR)
+	@mkdir -p $(OBJECT_DIR)/src
+	@mkdir -p $(OBJECT_DIR)/tests
 
 #---------------------------------------------------
 # MAKE THE EXECUTABLE FILE
@@ -56,7 +60,19 @@ performance.analysis:
 #---------------------------------------------------
 
 build.program.final.configuration:
-	@mv $(filter %.o, $(OBJECTS)) ../objects/
+	@mv $(filter %.o, $(OBJECTS)) $(OBJECT_DIR)/src
+
+#---------------------------------------------------
+# MAKE BUILD FOR TESTS
+#---------------------------------------------------
+
+build.tests: build.tests.executable build.tests.final.configuration
+
+build.tests.executable: $(TESTS_OBJECTS)
+	$(CXX) -o $(TEST_BIN) $^ $(LDFLAGS)
+
+build.tests.final.configuration:
+	@mv $(filter %.o, $(TESTS_OBJECTS)) $(OBJECT_DIR)/tests
 
 #---------------------------------------------------
 # CLEANING THE PROJECT

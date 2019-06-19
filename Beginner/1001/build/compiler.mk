@@ -3,11 +3,11 @@
 #---------------------------------------------------
 
 CFLAGS := -Wall -g -Wextra
-BINARY := ./bin/1001
+BINARY := ../bin/1001
 
 #---------------------------------------------------
 # SOURCE FILES (*.c, *.o)
 #---------------------------------------------------
 
-SOURCES := $(wildcard src/**/*.c src/*.c)
+SOURCES := $(wildcard ../src/**/*.c ../src/*.c)
 OBJECTS := $(patsubst %.c, %.o, $(SOURCES))

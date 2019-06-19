@@ -1,5 +1,6 @@
 include compiler.mk
 include valgrind.mk
+include environment.mk
 
 SUPPRESS_WARN = 2> /dev/null
 
@@ -28,9 +29,9 @@ build.program: build.program.report build.program.final.configuration performanc
 build.program.initial: build.program.sckeleton $(OBJECTS)
 
 build.program.sckeleton:
-	@mkdir objects
-	@mkdir report
-	@mkdir bin
+	@mkdir $(OBJECT_DIR)
+	@mkdir $(REPORT_DIR)
+	@mkdir $(BINARY_DIR)
 
 #---------------------------------------------------
 # MAKE THE EXECUTABLE FILE
@@ -55,11 +56,11 @@ performance.analysis:
 #---------------------------------------------------
 
 build.program.final.configuration:
-	@mv $(filter %.o, $(OBJECTS)) objects/
+	@mv $(filter %.o, $(OBJECTS)) ../objects/
 
 #---------------------------------------------------
 # CLEANING THE PROJECT
 #---------------------------------------------------
 
 clean:
-	@rm -R bin objects report $(SUPPRESS_WARN) || true
+	@rm -R $(BINARY_DIR) $(REPORT_DIR) $(OBJECT_DIR) $(SUPPRESS_WARN) || true

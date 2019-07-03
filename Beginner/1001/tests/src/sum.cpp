@@ -1,15 +1,47 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "CppUTest/TestHarness.h"
-#include "../../src/headers/sum.h"
+#include "CppUTest/MemoryLeakDetectorMallocMacros.h"
 
-TEST_GROUP(sum) {};
+#define TESTS_LENGTH 3
 
-TEST(sum, test_sum)
+TEST_GROUP(sum)
 {
-    fprintf(stdin, "10\n");
-    fprintf(stdin, "9\n");
+    char *results[TESTS_LENGTH];
 
-    sum();
+    void setup()
+    {
+        results[0] = (char *) "X = 19\n";
+        results[1] = (char *) "X = -6\n";
+        results[2] = (char *) "X = 8\n";
+    }
 
-    STRCMP_EQUAL("X = 19\n", buffer->asCharString());
+    void teardown()
+    {
+        for(int index = 0; index < TESTS_LENGTH; index++)
+        {
+            results[index] = NULL;
+        }
+    }
+};
+
+TEST(sum, results)
+{
+    int index = 0;
+    int value = 0;
+    int total = 0;
+
+    char *output = (char *) calloc(10, sizeof(char));
+
+    fscanf(stdin, "%d", &value);
+
+    for(; index < value ; index++)
+    {
+        fscanf(stdin, "%d", &total);
+        sprintf(output, "X = %d\n", total);
+
+        STRCMP_EQUAL(results[index], output);
+    }
+
+    free(output);
 }

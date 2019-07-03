@@ -24,8 +24,8 @@ LDFLAGS  := $(CPPUTEST_LIBRARIES)
 # OTHER PARAMETERS
 #---------------------------------------------------
 
-BINARY   := $(BINARY_DIR)/MVC
-TEST_BIN := $(BINARY_DIR)/TESTS
+BINARY   := $(BINARY_DIR)/1001
+TEST_BIN := $(BINARY_DIR)/tests
 
 #---------------------------------------------------
 # SOURCE FILES (*.c, *.o)
@@ -38,5 +38,5 @@ OBJECTS := $(patsubst %.c, %.o, $(SOURCES))
 # TESTS FILES (*.c, *.o)
 #---------------------------------------------------
 
-TESTS_SOURCES := $(wildcard $(TESTS_DIR)/**/*.cpp $(TESTS_DIR)/*.cpp $(SOURCE_DIR)/main.c)
+TESTS_SOURCES := $(wildcard $(TESTS_DIR)/**/*.cpp $(TESTS_DIR)/*.cpp)
 TESTS_OBJECTS := $(patsubst %.cpp, %.o, $(TESTS_SOURCES))

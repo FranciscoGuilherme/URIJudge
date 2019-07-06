@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>
+
 #include "headers/area.h"
 
 void input(double *pradius)
@@ -6,7 +8,16 @@ void input(double *pradius)
     fscanf(stdin, "%lf", pradius);
 }
 
-void area(double *pradius)
+double area(double *pradius)
 {
-    fprintf(stdout, "A=%.4lf\n", (*pradius) * (*pradius) * N);
+    return (*pradius) * (*pradius) * N;
+}
+
+char *output(double radius)
+{
+    char *buffer = (char *) calloc(1, sizeof(char) * 15);
+
+    sprintf(buffer, "A=%.4lf\n", radius);
+
+    return buffer;
 }

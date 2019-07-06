@@ -66,16 +66,13 @@ build.program.final.configuration:
 # MAKE BUILD FOR TESTS
 #---------------------------------------------------
 
-build.tests: build.tests.executable build.tests.final.configuration run.tests
+build.tests: build.tests.executable build.tests.final.configuration
 
 build.tests.executable: $(TESTS_OBJECTS)
 	$(CXX) -o $(TEST_BIN) $^ $(LDFLAGS)
 
 build.tests.final.configuration:
 	@mv $(filter %.o, $(TESTS_OBJECTS)) $(OBJECT_DIR)/tests
-
-run.tests:
-	@cd ../scripts/tests && bash ./results.sh && bash ./test.sh
 
 #---------------------------------------------------
 # CLEANING THE PROJECT

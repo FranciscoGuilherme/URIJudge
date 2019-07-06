@@ -4,6 +4,7 @@
 #define N 3.14159
 
 void input(double *);
-void area(double *);
+double area(double *);
+char *output(double);
 
 #endif

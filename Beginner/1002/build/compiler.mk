@@ -38,5 +38,6 @@ OBJECTS := $(patsubst %.c, %.o, $(SOURCES))
 # TESTS FILES (*.c, *.o)
 #---------------------------------------------------
 
-TESTS_SOURCES := $(wildcard $(TESTS_DIR)/**/*.cpp $(TESTS_DIR)/*.cpp)
+TESTS_METHODS := $(filter-out ../src/main.c, $(SOURCES))
+TESTS_SOURCES := $(wildcard $(TESTS_DIR)/**/*.cpp $(TESTS_DIR)/*.cpp $(TESTS_METHODS))
 TESTS_OBJECTS := $(patsubst %.cpp, %.o, $(TESTS_SOURCES))

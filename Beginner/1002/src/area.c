@@ -13,11 +13,11 @@ double area(double *pradius)
     return (*pradius) * (*pradius) * N;
 }
 
-char *output(double radius)
+char *output(double area)
 {
     char *buffer = (char *) calloc(1, sizeof(char) * 15);
 
-    sprintf(buffer, "A=%.4lf\n", radius);
+    sprintf(buffer, "A=%.4lf\n", area);
 
     return buffer;
 }

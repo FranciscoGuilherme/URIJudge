@@ -18,29 +18,24 @@ TEST_GROUP(circle)
     {
         tests = (test *) calloc(AMOUNT, sizeof(test));
 
-        tests[0] =
-        {
-            .area = 12.5664,
-            .radius = 2.00,
-            .output = "A=12.5664\n"
-        };
-
-        tests[1] =
-        {
-            .area = 31819.3103,
-            .radius = 100.64,
-            .output = "A=31819.3103\n"
-        };
-
-        tests[2] =
-        {
-            .area = 70685.7750,
-            .radius = 150.00,
-            .output = "A=70685.7750\n"
-        };
+        initialize(&tests[0], 12.5664, 2.00, "A=12.5664\n");
+        initialize(&tests[1], 31819.3103, 100.64, "A=31819.3103\n");
+        initialize(&tests[2], 70685.7750, 150.00, "A=70685.7750\n");
     }
 
-    void teardown() {}
+    void teardown()
+    {
+        free(tests);
+    }
+
+    void initialize(test *ptest, double area, double radius, const char* output)
+    {
+        ptest->area = area;
+        ptest->radius = radius;
+        ptest->output = output;
+
+        return;
+    }
 
     char *precision(double number)
     {
@@ -54,7 +49,7 @@ TEST_GROUP(circle)
 
 TEST(circle, area)
 {
-    for (int index = 0; index < 3; index++)
+    for (int index = 0; index < AMOUNT; index++)
     {
         char *t_area = precision(tests[index].area);
         char *r_area = precision(area(&tests[index].radius));
@@ -65,7 +60,7 @@ TEST(circle, area)
 
 TEST(circle, output)
 {
-    for (int index = 0; index < 3; index++)
+    for (int index = 0; index < AMOUNT; index++)
     {
         STRCMP_EQUAL(tests[index].output, output(tests[index].area));
     }

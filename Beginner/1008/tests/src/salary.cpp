@@ -1,9 +1,8 @@
-#include <list>
-
 #include "CppUTest/TestHarness.h"
 #include "../../src/headers/salary.h"
 
 #define AMOUNT 3
+#define OUTPUT 2
 
 TEST_GROUP(salary)
 {
@@ -28,35 +27,41 @@ TEST_GROUP(salary)
     {
         tests = (test *) calloc(AMOUNT, sizeof(test));
 
-        outputs[0].number = "NUMBER = 25\n";
-        outputs[1].number = "NUMBER = 1\n";
-        outputs[2].number = "NUMBER = 6\n";
+        initialize_numbers(&tests[0], 25, 100, 5.50, 550.00);
+        initialize_numbers(&tests[1], 1, 200, 20.50, 4100.00);
+        initialize_numbers(&tests[2], 6, 145, 15.55, 2254.75);
 
-        outputs[0].salary = "SALARY = U$ 550.00\n";
-        outputs[1].salary = "SALARY = U$ 4100.00\n";
-        outputs[2].salary = "SALARY = U$ 2254.75\n";
-
-        initialize(&tests[0], 25, 100, 5.50, 550.00, &outputs[0]);
-        initialize(&tests[1], 1, 200, 20.50, 4100.00, &outputs[1]);
-        initialize(&tests[2], 6, 145, 15.55, 2254.75, &outputs[2]);
+        initialize_output(&tests[0], "NUMBER = 25\n", "SALARY = U$ 550.00\n");
+        initialize_output(&tests[1], "NUMBER = 1\n", "SALARY = U$ 4100.00\n");
+        initialize_output(&tests[2], "NUMBER = 6\n", "SALARY = U$ 2254.75\n");
     }
 
     void teardown()
     {
+        for (int index = 0; index < AMOUNT; index++)
+        {
+            free(tests[index].output);
+        }
+
         free(tests);
-        free(outputs);
     }
 
-    void initialize(test *ptest, int number, int hours, float value, float salary, out *outputs)
+    void initialize_numbers(test *ptest, int number, int hours, float value, float salary)
     {
-        ptest->output = (const char **) calloc(2, sizeof(const char *));
-
         ptest->number = number;
         ptest->hours = hours;
         ptest->value = value;
         ptest->salary = salary;
-        ptest->output[0] = outputs->number;
-        ptest->output[1] = outputs->salary;
+
+        return;
+    }
+
+    void initialize_output(test *ptest, const char *number, const char *salary)
+    {
+        ptest->output = (out *) calloc(OUTPUT, sizeof(out));
+
+        ptest->output->number = number;
+        ptest->output->salary = salary;
 
         return;
     }
@@ -94,7 +99,7 @@ TEST(salary, output)
             tests[index].salary
         );
 
-        STRCMP_EQUAL(tests[index].output[0], buffer[0]);
-        STRCMP_EQUAL(tests[index].output[1], buffer[1]);
+        STRCMP_EQUAL(tests[index].output->number, buffer[0]);
+        STRCMP_EQUAL(tests[index].output->salary, buffer[1]);
     }
 }

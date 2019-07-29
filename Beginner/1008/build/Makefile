@@ -36,6 +36,7 @@ build.program.sckeleton:
 	@mkdir $(REPORT_DIR)
 	@mkdir -p $(OBJECT_DIR)/src
 	@mkdir -p $(OBJECT_DIR)/tests
+	@mkdir $(DOXYGEN_DIR)
 
 #---------------------------------------------------
 # MAKE THE EXECUTABLE FILE
@@ -75,8 +76,15 @@ build.tests.final.configuration:
 	@mv $(filter %.o, $(TESTS_OBJECTS)) $(OBJECT_DIR)/tests
 
 #---------------------------------------------------
+# MAKE BUILD FOR DOCUMENTATION
+#---------------------------------------------------
+
+build.documentation:
+	@cd ./scripts/documentation/ && bash orchestrator.sh
+
+#---------------------------------------------------
 # CLEANING THE PROJECT
 #---------------------------------------------------
 
 clean:
-	@rm -R $(BINARY_DIR) $(REPORT_DIR) $(OBJECT_DIR) $(SUPPRESS_WARN) || true
+	@rm -R $(BINARY_DIR) $(REPORT_DIR) $(OBJECT_DIR) $(DOXYGEN_DIR) $(SUPPRESS_WARN) || true

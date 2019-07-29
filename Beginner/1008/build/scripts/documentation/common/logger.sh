@@ -28,7 +28,6 @@ function check()
         build_error_file "$__ERRNO__"
 
         printf "%s\n\n" "Somenthing didn't work well. Error saved on $LOG_FILE"
-        printf "[ERROR] (%s)\n" "$__ERRNO__"
 
         exit
     fi

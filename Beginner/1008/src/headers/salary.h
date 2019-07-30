@@ -16,9 +16,9 @@
  */
 struct employee
 {
-    int number;  /**< Número do funcionário#number. */
-    int hours;   /**< Número de horas trabalhadas#hours. */
-    float value; /**< Valor recebido por hora trabalhada#value */
+    int number;   /**< Número do funcionário#number. */
+    int hours;    /**< Número de horas trabalhadas#hours. */
+    double value; /**< Valor recebido por hora trabalhada#value */
 };
 
 /**
@@ -37,7 +37,7 @@ struct employee
  *
  * @return void
  */
-void input(int *number, int *hours, float *value);
+void input(int *number, int *hours, double *value);
 
 /**
  * @~portuguese
@@ -58,7 +58,7 @@ void input(int *number, int *hours, float *value);
  *
  * @return float
  */
-float salary(int *hours, float *value);
+double salary(int *hours, double *value);
 
 /**
  * @~portuguese
@@ -69,7 +69,7 @@ float salary(int *hours, float *value);
  *
  * @return char **
  */
-char **output(int *number, float salary);
+char **output(int *number, double salary);
 
 /**
  * @~portuguese

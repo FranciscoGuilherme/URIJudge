@@ -13,21 +13,21 @@
 
 #include "headers/salary.h"
 
-void input(int *number, int *hours, float *value)
+void input(int *number, int *hours, double *value)
 {
     fscanf(stdin, "%d%*c", number);
     fscanf(stdin, "%d%*c", hours);
-    fscanf(stdin, "%f%*c", value);
+    fscanf(stdin, "%lf%*c", value);
 
     return;
 }
 
-float salary(int *hours, float *value)
+double salary(int *hours, double *value)
 {
     return calculate((*hours), (*value));
 }
 
-char **output(int *number, float salary)
+char **output(int *number, double salary)
 {
     char **buffer = (char **) calloc(2, sizeof(char *));
 
@@ -35,7 +35,7 @@ char **output(int *number, float salary)
     buffer[1] = (char *) calloc(30, sizeof(char));
 
     sprintf(buffer[0], "NUMBER = %d\n", (*number));
-    sprintf(buffer[1], "SALARY = U$ %.2f\n", salary);
+    sprintf(buffer[1], "SALARY = U$ %.2lf\n", salary);
 
     return buffer;
 }

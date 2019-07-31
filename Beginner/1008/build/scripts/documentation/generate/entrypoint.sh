@@ -1,5 +1,15 @@
 #!/bin/bash
 
+function _replace_status()
+{
+    local arguments="$1"
+
+    case "${arguments[2]}" in
+        '1') create_doxyfile "${arguments[1]}" "$REPLACE_ACTIVATED" ;;
+        *)   create_doxyfile "${arguments[1]}" "$REPLACE_DISABLED" ;;
+    esac
+}
+
 : '
 |------------------------------------------------
 | [description] Verify the argument
@@ -12,8 +22,21 @@ function verify_parameters()
     local arguments="$1"
 
     case "${arguments[0]}" in
-        '--help') printf "%s\n" "\033[33mUsage:\033[0m\n bash documentation {doxygen_file_directory}" && exit;;
-        '--dir'
+        '-h') printf "%s\n" "\033[33mUsage:\033[0m\n bash documentation {doxygen_file_directory}" && exit ;;
+        '-d')
+                if [ ! -z "${arguments[1]}" ] && [ -f "${arguments[1]}" ] ; then
+                    _replace_status "$arguments"
+                fi
+
+                if [ ! -f "${arguments[1]}" ]; then
+                    arguments[3]="${arguments[2]}"
+                    arguments[2]="${arguments[1]}"
+
+                    read_doxyfile_path; arguments[1]=${__}
+                    _replace_status "$arguments"
+                fi
+            ;;
+        '-s')
     esac
 }
 
@@ -24,13 +47,9 @@ function verify_parameters()
 | [return]      [string] Doxygen location
 |------------------------------------------------
 '
-function get_doxyfile_path()
+function read_doxyfile_path()
 {
-    local doxygen_directory="$1"
-
-    if [ "$doxygen_directory" == '--help' ]; then
-        doxygen_directory=''
-    fi
+    local doxygen_directory
 
     while [ -z "$doxygen_directory" ]; do
         printf "%s" "Input the absolute path of the directory: "

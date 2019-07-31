@@ -1,5 +1,7 @@
 #!/bin/bash
 
+readonly REPLACE_DISABLED=0
+readonly REPLACE_ACTIVATED=1
 readonly CONFIG=(
     'OUTPUT_LANGUAGE'
     'EXTRACT_ALL'

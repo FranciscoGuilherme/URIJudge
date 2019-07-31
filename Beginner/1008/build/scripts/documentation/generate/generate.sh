@@ -1,7 +1,7 @@
 #!/bin/bash
 
-source parameters.sh
-source ../common/logger.sh
+source $(pwd)/parameters.sh
+source $(pwd)/../common/logger.sh
 
 : '
 |------------------------------------------------

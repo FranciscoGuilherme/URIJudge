@@ -18,42 +18,62 @@
 |------------------------------------------------
 '
 
-function _build_source_path()
+: '
+|------------------------------------------------
+| [description] Get the absolute path of the file
+|
+| [return]      [string] The absolute path
+|------------------------------------------------
+'
+function _source_path()
 {
-    local path
+    local path=$(pwd)
+    local file="${0//.\/}"
+    local amount=$(echo "$file" | awk -F '/' '{print NF}')
 
-    for ((count=; count <= manipulate[0]; count++)); do
-        path="$path/${manipulate[$count]}"
+    for ((count = 1; count <= amount; count++)); do
+        path="$path/$(echo "$file" | awk -F '/' '{print $'$count'}')"
     done
+
+    __=$path
 }
 
-function source_path()
+: '
+|------------------------------------------------
+| [description] Verify the argument
+|
+| [return]      [void]
+|------------------------------------------------
+'
+function includes_path()
 {
-    local file="$0"
-    local path=$(pwd)
-    local manipulate=(
-        "$(echo $file | awk -F '/' '{print NF}')"
-        "$(echo $file | awk -F '/' '{print $1}')"
+    declare -A file
+
+    local path
+    local file=(
+        [path]="$0"
+        [name]=$(echo "$0" | awk -F '/' '{print $NF}')
     )
 
-    if [ "${manipulate[1]}" == '.' ]; then
-        for ((count=2; count <= manipulate[0]; count++)); do
-            path="$path/${manipulate[$count]}"
-        done
-    fi
+    _source_path "${file['path']}"; path=${__}
+
+    path=$(echo "${path//\/${file[name]}//}")
+
+    __=$path
 }
 
-source $(source_path "$0")/common/logger.sh
-source $(source_path "$0")/generate/generate.sh
-source $(source_path "$0")/generate/entrypoint.sh
+source $(includes_path "$0")common/logger.sh
+source $(includes_path "$0")generate/entrypoint.sh
+source $(includes_path "$0")generate/generate.sh
 
 function main()
 {
     local arguments=("$1" "$2" "$3")
 
-    echo "$0"
-    exit
+    includes_path "$0"; path=${__}
 
+    echo "$path"
+    exit
 
 }
 

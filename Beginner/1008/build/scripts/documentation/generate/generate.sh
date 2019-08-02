@@ -1,7 +1,37 @@
 #!/bin/bash
 
-source $(pwd)/parameters.sh
-source $(pwd)/../common/logger.sh
+function _source_path()
+{
+    local path=$(pwd)
+    local file="${0//.\/}"
+    local amount=$(echo "$file" | awk -F '/' '{print NF}')
+
+    for ((count = 1; count <= amount; count++)); do
+        path="$path/$(echo "$file" | awk -F '/' '{print $'$count'}')"
+    done
+
+    __=$path
+}
+
+function includes_path()
+{
+    declare -A file
+
+    local path
+    local file=(
+        [path]="$0"
+        [name]=$(echo "$0" | awk -F '/' '{print $NF}')
+    )
+
+    _source_path "${file['path']}"; path=${__}
+
+    path=$(echo "${path//\/${file[name]}//}")
+
+    __=$path
+}
+
+source $(includes_path "$0")common/logger.sh
+source $(includes_path "$0")generate/parameters.sh
 
 : '
 |------------------------------------------------

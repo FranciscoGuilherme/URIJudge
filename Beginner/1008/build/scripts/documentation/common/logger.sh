@@ -6,7 +6,7 @@
 |----------------------------------------------
 '
 
-readonly LOG_FILE=/tmp/doxygen_generator.log
+LOG_FILE=/tmp/doxygen_generator.log
 
 function build_error_file()
 {

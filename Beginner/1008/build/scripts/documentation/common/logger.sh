@@ -1,13 +1,15 @@
 #!/bin/bash
 
-: '
-|----------------------------------------------
-| ERROR TREATMENT
-|----------------------------------------------
-'
-
 LOG_FILE=/tmp/doxygen_generator.log
 
+: '
+|------------------------------------------------
+| [description] Save the error description and
+|               date in a file
+|
+| [return]      [void]
+|------------------------------------------------
+'
 function build_error_file()
 {
     __ERRNO__="$1"
@@ -19,6 +21,14 @@ function build_error_file()
     } >> "$LOG_FILE"
 }
 
+: '
+|------------------------------------------------
+| [description] Check the command statsu code
+|               looking for any error
+|
+| [return]      [void]
+|------------------------------------------------
+'
 function check()
 {
     __CODE__=$1

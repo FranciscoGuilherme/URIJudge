@@ -1,3 +1,11 @@
+/**
+ * @~portuguese
+ * @file main.c
+ * @author Francisco Guilherme A. S. Bessa
+ * @brief
+ *      - Ponto de entrada da aplicação
+ */
+
 #include <stdio.h>
 #include "headers/sum.h"
 

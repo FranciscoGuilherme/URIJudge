@@ -19,11 +19,14 @@ SUPPRESS_WARN = 2> /dev/null
 #      1.8. build.tests
 #      1.9. build.tests.executable
 #      1.10. build.tests.final.configuration
-#      1.11. clean
+#      1.11. build.documentation
+#      1.12. build.documentation.files
+#      1.13. build.documentation.final.configuration
+#      1.14. clean
 #
 #===================================================
 
-build.program: build.program.report build.program.final.configuration performance.analysis
+build.program: build.program.report performance.analysis
 
 #---------------------------------------------------
 # MAKE THE BASIC STRUCTURE
@@ -36,6 +39,7 @@ build.program.sckeleton:
 	@mkdir $(REPORT_DIR)
 	@mkdir -p $(OBJECT_DIR)/src
 	@mkdir -p $(OBJECT_DIR)/tests
+	@mkdir $(DOXYGEN_DIR)
 
 #---------------------------------------------------
 # MAKE THE EXECUTABLE FILE
@@ -48,7 +52,7 @@ build.program.executable: clean build.program.initial
 # MAKE A DETAIL REPORT (MEMORY & PROGRAM STATUS)
 #---------------------------------------------------
 
-build.program.report: build.program.executable
+build.program.report: build.program.executable build.program.final.configuration
 	valgrind $(MEMORY_LEAKS) $(BINARY)
 
 performance.analysis:
@@ -75,8 +79,20 @@ build.tests.final.configuration:
 	@mv $(filter %.o, $(TESTS_OBJECTS)) $(OBJECT_DIR)/tests
 
 #---------------------------------------------------
+# MAKE BUILD FOR DOCUMENTATION
+#---------------------------------------------------
+
+build.documentation: build.documentation.files build.documentation.final.configuration
+
+build.documentation.files:
+	@cd ./scripts/documentation/ && bash entrypoint.sh -d --replace
+
+build.documentation.final.configuration:
+	@mv $(SOURCE_DIR)/html/ $(SOURCE_DIR)/latex/ $(SOURCE_DIR)/Doxyfile $(DOXYGEN_DIR)
+
+#---------------------------------------------------
 # CLEANING THE PROJECT
 #---------------------------------------------------
 
 clean:
-	@rm -R $(BINARY_DIR) $(REPORT_DIR) $(OBJECT_DIR) $(SUPPRESS_WARN) || true
+	@rm -R $(BINARY_DIR) $(REPORT_DIR) $(OBJECT_DIR) $(DOXYGEN_DIR) $(SUPPRESS_WARN) || true

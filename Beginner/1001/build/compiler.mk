@@ -24,7 +24,7 @@ LDFLAGS  := $(CPPUTEST_LIBRARIES)
 # OTHER PARAMETERS
 #---------------------------------------------------
 
-BINARY   := $(BINARY_DIR)/1001
+BINARY   := $(BINARY_DIR)/1008
 TEST_BIN := $(BINARY_DIR)/tests
 
 #---------------------------------------------------

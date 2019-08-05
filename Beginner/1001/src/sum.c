@@ -1,3 +1,11 @@
+/**
+ * @~portuguese
+ * @file sun.c
+ * @author Francisco Guilherme A. S. Bessa
+ * @brief
+ *      - 
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 

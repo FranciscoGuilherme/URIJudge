@@ -2,6 +2,7 @@
  * @~portuguese
  * @file main.c
  * @author Francisco Guilherme A. S. Bessa
+ * @date 2019/08/05
  * @brief
  *      - Ponto de entrada da aplicação
  */

@@ -2,8 +2,9 @@
  * @~portuguese
  * @file sun.c
  * @author Francisco Guilherme A. S. Bessa
+ * @date 2019/08/05
  * @brief
- *      - 
+ *      - Contém a lógica de soma de dois inteiros
  */
 
 #include <stdio.h>

@@ -16,8 +16,8 @@ TEST_GROUP(salary)
     {
         int number;
         int hours;
-        float value;
-        float salary;
+        double value;
+        double salary;
         out *output;
     } test;
 

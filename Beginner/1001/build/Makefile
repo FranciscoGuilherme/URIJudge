@@ -26,7 +26,8 @@ SUPPRESS_WARN = 2> /dev/null
 #
 #===================================================
 
-build.program: build.program.report performance.analysis
+build.program: CFLAGS := -D $(LANG) $(CFLAGS)
+build.program: build.program.report performance.analysis build.documentation
 
 #---------------------------------------------------
 # MAKE THE BASIC STRUCTURE
@@ -85,7 +86,7 @@ build.tests.final.configuration:
 build.documentation: build.documentation.files build.documentation.final.configuration
 
 build.documentation.files:
-	@cd ./scripts/documentation/ && bash entrypoint.sh -d --replace pt-br
+	@cd ./scripts/documentation/ && bash entrypoint.sh -d $$(PROJECT_DIR) --replace $(LANG)
 
 build.documentation.final.configuration:
 	@rm -fr $(DOXYGEN_DIR)/*

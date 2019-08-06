@@ -24,14 +24,13 @@ source "$(pwd)"/generate/generate.sh
 : '
 |------------------------------------------------------
 | [language]    English
-| [description] Replace or not the default configura-
-|               tions of doxygen file
+| [description] Override default doxygen file settings
 |
-| [param : string] $1 Parameter to input directory
+| [param : string] $1 Parameter for input directory
 | [param : string] $2 Doxyfile directory
-| [param : string] $3 Parameter to replace default file
-|                     configurations
-| [param : string] $4 Optional parameter to export the
+| [param : string] $3 Parameter to override default
+|                     file settings
+| [param : string] $4 Optional parameter for exporting
 |                     documentation in a specific lang
 |
 | [return : void]
@@ -53,11 +52,11 @@ function _replace_status()
 | [language]    English
 | [description] Verify the input arguments
 |
-| [param : string] $1 Parameter to input directory
+| [param : string] $1 Parameter for input directory
 | [param : string] $2 Doxyfile directory
-| [param : string] $3 Parameter to replace default file
-|                     configuration
-| [param : string] $4 Optional parameter to export the
+| [param : string] $3 Parameter to override default
+|                     file settings
+| [param : string] $4 Optional parameter for exporting
 |                     documentation in a specific lang
 |
 | [return : void]
@@ -110,11 +109,11 @@ function read_doxyfile_path()
 | [language]    English
 | [description] Entrypoint function
 |
-| [param : string] $1 Parameter to input directory
+| [param : string] $1 Parameter for input directory
 | [param : string] $2 Doxyfile directory
-| [param : string] $3 Parameter to replace default file
-|                     configurations
-| [param : string] $4 Optional parameter to export the
+| [param : string] $3 Parameter to override default
+|                     file settings
+| [param : string] $4 Optional parameter for exporting
 |                     documentation in a specific lang
 |
 | [return : void]

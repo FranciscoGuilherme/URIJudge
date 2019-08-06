@@ -10,7 +10,7 @@ source "$(pwd)"/generate/parameters.sh
 |               directory
 |
 | [param  : string] $1 Doxyfile directory
-| [param  : string] $2 Flag to active file replace
+| [param  : string] $2 Flag to override default settings
 | [param  : string] $3 Language to export documentation
 |
 | [return : void]
@@ -25,6 +25,7 @@ function create_doxyfile()
     if [ ! -z "$doxyfile_directory" ] && [ -d "$doxyfile_directory" ]; then
         cd "$doxyfile_directory"
 
+        doxygen -d _PT_BR
         doxygen -g "$doxyfile_directory"/Doxyfile
 
         if [ "$doxyfile_replace" == '1' ]; then
@@ -40,9 +41,9 @@ function create_doxyfile()
 : '
 |------------------------------------------------------
 | [language]    English
-| [description] Searches for a particular setting in
-|               the doxygen file and how its activated
-|               by string substitution
+| [description] Searches for a specific setting in the
+|               doxygen file and overrides the default
+|               settings
 |
 | [param : string] $1 Doxyfile directory
 | [param : string] $2 Doxygen configuration file name
@@ -63,12 +64,11 @@ function replace_configurations()
 : '
 |------------------------------------------------------
 | [language]    English
-| [description] Configure the output language for
-|               doxyfile documentation
+| [description] Set output language for doxyfile
 |
 | [param : string] $1 Doxyfile directory
 | [param : string] $2 Doxygen configuration file name
-| [param : string] $3 Language of the documentation
+| [param : string] $3 Documentation language
 |
 | [return : void]
 |------------------------------------------------------
@@ -80,7 +80,7 @@ function set_language()
     local doxyfile_language="$3"
 
     case "$doxyfile_language" in
-        'pt-br') sed -i 's/^OUTPUT_LANGUAGE.*$/OUTPUT_LANGUAGE = Portuguese/g' "$doxyfile_directory"/"$doxyfile_file_name" ;;
+        '_PT_BR') sed -i 's/^OUTPUT_LANGUAGE.*$/OUTPUT_LANGUAGE = Portuguese/g' "$doxyfile_directory"/"$doxyfile_file_name" ;;
         *)       sed -i 's/^OUTPUT_LANGUAGE.*$/OUTPUT_LANGUAGE = English/g' "$doxyfile_directory"/"$doxyfile_file_name" ;;
     esac
 }

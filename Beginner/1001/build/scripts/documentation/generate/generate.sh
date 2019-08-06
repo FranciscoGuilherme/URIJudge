@@ -81,6 +81,6 @@ function set_language()
 
     case "$doxyfile_language" in
         '_PT_BR') sed -i 's/^OUTPUT_LANGUAGE.*$/OUTPUT_LANGUAGE = Portuguese/g' "$doxyfile_directory"/"$doxyfile_file_name" ;;
-        *)       sed -i 's/^OUTPUT_LANGUAGE.*$/OUTPUT_LANGUAGE = English/g' "$doxyfile_directory"/"$doxyfile_file_name" ;;
+        *)        sed -i 's/^OUTPUT_LANGUAGE.*$/OUTPUT_LANGUAGE = English/g' "$doxyfile_directory"/"$doxyfile_file_name" ;;
     esac
 }

@@ -26,7 +26,6 @@ SUPPRESS_WARN = 2> /dev/null
 #
 #===================================================
 
-build.program: CFLAGS := -D $(LANG) $(CFLAGS)
 build.program: build.program.report performance.analysis build.documentation
 
 #---------------------------------------------------
@@ -86,7 +85,7 @@ build.tests.final.configuration:
 build.documentation: build.documentation.files build.documentation.final.configuration
 
 build.documentation.files:
-	@cd ./scripts/documentation/ && bash entrypoint.sh -d $$(PROJECT_DIR) --replace $(LANG)
+	@cd ./scripts/documentation/ && bash entrypoint.sh -d $$PROJECT_DIR --replace $(LANGUAGE)
 
 build.documentation.final.configuration:
 	@rm -fr $(DOXYGEN_DIR)/*

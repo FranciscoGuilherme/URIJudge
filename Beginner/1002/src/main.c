@@ -1,4 +1,22 @@
+/**
+ * @~portuguese
+ * @file main.c
+ * @author Francisco Guilherme A. S. Bessa
+ * @date 2019/08/07
+ * @brief
+ *      - Ponto de entrada da aplicação
+ *
+ * @~english
+ * @file main.c
+ * @author Francisco Guilherme A. S. Bessa
+ * @date 2019/08/07
+ * @brief
+ *      - Entrypoint
+ */
+
 #include <stdio.h>
+#include <stdlib.h>
+
 #include "headers/area.h"
 
 int main(int argc, char *argv[])
@@ -7,10 +25,15 @@ int main(int argc, char *argv[])
     (void) argv;
 
     double radius = 0.0;
+    char *message = NULL;
 
     input(&radius);
 
-    fprintf(stdout, "%s", output(area(&radius)));
+    message = output(area(&radius));
+
+    fprintf(stdout, "%s", message);
+
+    free(message);
 
     return 0;
 }

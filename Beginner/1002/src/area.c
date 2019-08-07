@@ -1,3 +1,19 @@
+/**
+ * @~portuguese
+ * @file area.c
+ * @author Francisco Guilherme A. S. Bessa
+ * @date 2019/08/07
+ * @brief
+ *      - Contém a lógica do cálculo da área dado o raio
+ *
+ * @~english
+ * @file area.c
+ * @author Francisco Guilherme A. S. Bessa
+ * @date 2019/08/07
+ * @brief
+ *      - Contains the logic of calculating the area given the radius
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 

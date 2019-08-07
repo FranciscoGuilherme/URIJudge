@@ -5,16 +5,16 @@
  * @~portuguese
  * @brief Função responsável por ler os dados de entrada
  *
- * @param[out] int a Primeiro número inteiro de entrada
- * @param[out] int b Segundo número inteiro de entrada
+ * @param[out] a Primeiro número inteiro de entrada
+ * @param[out] b Segundo número inteiro de entrada
  *
  * @return void
  *
  * @~english
  * @brief Function responsible for reading input data
  *
- * @param[out] int a First Entry Integer
- * @param[out] int b Second Integer Input
+ * @param[out] a First Entry Integer
+ * @param[out] b Second Integer Input
  *
  * @return void
  */
@@ -24,18 +24,18 @@ void input(int *a, int *b);
  * @~portuguese
  * @brief Função responsável por efetuar a soma dos dois valores inteiros a e b
  *
- * @param[out] int a Primeiro número inteiro
- * @param[out] int b Segundo número inteiro
+ * @param[out] a Primeiro número inteiro
+ * @param[out] b Segundo número inteiro
  *
- * @return int Soma de a e b
+ * @return Soma de a e b
  *
  * @~english
  * @brief Function responsible for summing the two integers a and b
  *
- * @param[out] int a First Entry Integer
- * @param[out] int b Second Integer Input
+ * @param[out] a First Entry Integer
+ * @param[out] b Second Integer Input
  *
- * @return int Sum of a and b
+ * @return Sum of a and b
  */
 int sum(int *a, int *b);
 
@@ -43,16 +43,16 @@ int sum(int *a, int *b);
  * @~portuguese
  * @brief Função responsável por gerar a mensagem final de apresentação
  *
- * @param int sum Resultado da soma retornada por ::sum
+ * @param sum Resultado da soma retornada por ::sum
  *
- * @return[out] char Ponteiro para a mensagem final de apresentação
+ * @return[out] Ponteiro para a mensagem final de apresentação
  *
  * @~english
  * @brief Role responsible for generating the final presentation message
  *
- * @param int sum Sum result returned by ::sum
+ * @param sum Sum result returned by ::sum
  *
- * @return[out] char Pointer to the final presentation message
+ * @return[out] Pointer to the final presentation message
  */
 char *output(int sum);
 

@@ -80,7 +80,7 @@ function verify_parameters()
                     _replace_status "${arguments[@]}"
                 fi
             ;;
-        *) printf "%s\n" 'Usage: bash <script.sh> <doxygen_file_directory> [--replace] [-l <lang-country>]' && exit ;;
+        *) printf "%s\n" 'Usage: bash <script.sh> <doxygen_file_directory> [--replace] [<lang-country>]' && exit ;;
     esac
 }
 

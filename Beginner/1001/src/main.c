@@ -15,6 +15,8 @@
  */
 
 #include <stdio.h>
+#include <stdlib.h>
+
 #include "headers/sum.h"
 
 int main(int argc, char *argv[])
@@ -24,10 +26,15 @@ int main(int argc, char *argv[])
 
     int a = 0;
     int b = 0;
+    char *message = NULL;
 
     input(&a, &b);
 
-    fprintf(stdout, "%s", output(sum(&a, &b)));
+    message = output(sum(&a, &b));
+
+    fprintf(stdout, "%s", message);
+
+    free(message);
 
     return 0;
 }

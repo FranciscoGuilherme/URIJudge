@@ -17,7 +17,7 @@ CPPUTEST_LIBRARIES := $(shell pkg-config --libs cpputest)
 # GNUCC PARAMETERS
 #---------------------------------------------------
 
-CFLAGS   :=  -Wall -g $(CPPUTEST_INCLUDES)
+CFLAGS   := -Wall -g $(CPPUTEST_INCLUDES)
 LDFLAGS  := $(CPPUTEST_LIBRARIES)
 
 #---------------------------------------------------

@@ -20,14 +20,14 @@
 - Add the variable PROJECT_DIR to your .bashrc file with the
   full path to the project directory (src/) allowing
   the reading and construction of documentation
-    ``` sh
-    export PROJECT_DIR=<rc_path>
-    ```
+    ``` sh
+    export PROJECT_DIR=<src_path>
+    ```
 - Access the _build_ directory
 - Run the command below passing the language in which the documentation will be exported
     ``` sh
-    $ make build.program LANGUAGE=<language>
-    ```
-- List of languages ​​currently supported in the project
-    - `_PT_BR`: Portuguese
-    - `_EN_US`: English
+    $ make build.program LANGUAGE=<language>
+    ```
+- List of languages currently supported in the project
+    - `_PT_BR`: Portuguese
+    - `_EN_US`: English

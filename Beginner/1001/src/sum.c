@@ -1,3 +1,19 @@
+/**
+ * @~portuguese
+ * @file sum.c
+ * @author Francisco Guilherme A. S. Bessa
+ * @date 2019/08/05
+ * @brief
+ *      - Contém a lógica de soma de dois inteiros
+ *
+ * @~english
+ * @file sum.c
+ * @author Francisco Guilherme A. S. Bessa
+ * @date 2019/08/05
+ * @brief
+ *      - Contains two integer sum logic
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 

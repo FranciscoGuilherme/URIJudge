@@ -1,3 +1,19 @@
+/**
+ * @~portuguese
+ * @file average.c
+ * @author Francisco Guilherme A. S. Bessa
+ * @date 2019/08/07
+ * @brief
+ *      - Contém a lógica de cálculo da média ponderada
+ *
+ * @~english
+ * @file average.c
+ * @author Francisco Guilherme A. S. Bessa
+ * @date 2019/08/07
+ * @brief
+ *      - Contains weighted average calculation logic
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 

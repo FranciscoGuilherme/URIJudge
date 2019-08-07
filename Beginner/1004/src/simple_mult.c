@@ -1,3 +1,19 @@
+/**
+ * @~portuguese
+ * @file simple_mult.c
+ * @author Francisco Guilherme A. S. Bessa
+ * @date 2019/08/07
+ * @brief
+ *      - Contém a lógica de multiplicação de dois inteiros
+ *
+ * @~english
+ * @file simple_mult.c
+ * @author Francisco Guilherme A. S. Bessa
+ * @date 2019/08/07
+ * @brief
+ *      - Contains two integer multiplication logic
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 

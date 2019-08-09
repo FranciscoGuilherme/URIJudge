@@ -1,3 +1,19 @@
+/**
+ * @~portuguese
+ * @file sub.c
+ * @author Francisco Guilherme A. S. Bessa
+ * @date 2019/08/09
+ * @brief
+ *      - Contém a lógica de cálculo
+ *
+ * @~english
+ * @file sub.c
+ * @author Francisco Guilherme A. S. Bessa
+ * @date 2019/08/09
+ * @brief
+ *      - Contains calculation logic
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 

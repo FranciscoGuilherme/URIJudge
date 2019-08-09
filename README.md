@@ -22,12 +22,11 @@
     - __doxygen__ para gerar a documentação do projeto através de
       comentários codificados nos arquivos de código
     - __cpputest__ para a codificação dos testes do projeto
-- Importante:
-    - Caso você encontre erros ao usar o _doxygen_ referente à ferramenta
-      _graphviz_ por não ter sido encontrada, execute:
-      ``` sh
-      $ sudo apt-get install graphviz
-      ```
+- Caso você encontre erros ao usar o _doxygen_ referente à ferramenta _graphviz_
+  por não ter sido encontrada, execute:
+  ``` sh
+  $ sudo apt-get install graphviz
+  ```
 
 ### <span id='instalacao'>Guia de instalação</span>
 
@@ -67,31 +66,28 @@
 - Acessar o diretório _build_ do exercício escolhido
 - Executar o comando abaixo com a opção de especificar ou não
   um idioma para a extração da documentação
-``` sh
-$ make build.program [LANGUAGE=<language>]
-```
+  ``` sh
+  $ make build.program [LANGUAGE=<language>]
+  ```
 - Exemplos:
-``` sh
-$ make build.program
-$ make build.program LANGUAGE=_PT_BR
-```
+  ``` sh
+  $ make build.program
+  $ make build.program LANGUAGE=_PT_BR
+  ```
 - Caso não queira que o processo de gerar a documentação pare,
   solicitando o caminho absoluto dos arquivos de um exercício
   (localizado em src/), siga as instruções abaixo:
     - Adicione a variável PROJECT_DIR no arquivo ~/.bashrc com o
       caminho completo do diretório src/ do exercício
-        ``` sh
-        export PROJECT_DIR=<caminho_src>
-        ```
+      ``` sh
+      export PROJECT_DIR=<caminho_src>
+      ```
 
 ## <span id='testes'>Testes no projeto</span>
 
 - Para gerar os testes execute, após ter gerado o executável
   (passo anterior), dentro do diretório _build_:
-``` sh
-$ make build.tests
-```
-- Execute os testes:
-``` sh
-$ ../bin/tests
-```
+  ``` sh
+  $ make build.tests
+  $ ../bin/tests
+  ```

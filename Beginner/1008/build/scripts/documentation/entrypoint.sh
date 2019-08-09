@@ -1,87 +1,96 @@
 #!/bin/bash
 
 : '
-|------------------------------------------------
+|------------------------------------------------------
 | GENERATE THE PROJECT DOCUMENTATION WITH doxygen
-|------------------------------------------------
+|------------------------------------------------------
 |
 | Project  : Doxygen generator
 | Filename : entrypoint.sh
 | Version  : 0.0.0
 | Date     : July 29, 2019
 |
-|------------------------------------------------
+|------------------------------------------------------
 |
 | Copyright (c) 2019, Francisco G. A. S. Bessa
 | All rights reserved.
 |
-|------------------------------------------------
+|------------------------------------------------------
 '
 
 source "$(pwd)"/common/logger.sh
 source "$(pwd)"/generate/generate.sh
 
 : '
-|------------------------------------------------
-| [description] Replace or not the default confi-
-|               gurations of doxygen file
+|------------------------------------------------------
+| [language]    English
+| [description] Override default doxygen file settings
 |
-| [return]      [void]
-|------------------------------------------------
+| [param : string] $1 Parameter for input directory
+| [param : string] $2 Doxyfile directory
+| [param : string] $3 Parameter to override default
+|                     file settings
+| [param : string] $4 Optional parameter for exporting
+|                     documentation in a specific lang
+|
+| [return : void]
+|------------------------------------------------------
 '
 
 function _replace_status()
 {
-    local arguments=("$1" "$2" "$3")
+    local arguments=("$1" "$2" "$3" "$4")
 
     case "${arguments[2]}" in
-        '--replace') create_doxyfile "${arguments[1]}" "$REPLACE_ACTIVATED" ;;
-        *)           create_doxyfile "${arguments[1]}" "$REPLACE_DISABLED" ;;
+        '--replace') create_doxyfile "${arguments[1]}" "$REPLACE_ACTIVATED" "${arguments[3]}" ;;
+        *)           create_doxyfile "${arguments[1]}" "$REPLACE_DISABLED" "${arguments[3]}" ;;
     esac
 }
 
 : '
-|------------------------------------------------
+|------------------------------------------------------
+| [language]    English
 | [description] Verify the input arguments
 |
-| [return]      [void]
-|------------------------------------------------
+| [param : string] $1 Parameter for input directory
+| [param : string] $2 Doxyfile directory
+| [param : string] $3 Parameter to override default
+|                     file settings
+| [param : string] $4 Optional parameter for exporting
+|                     documentation in a specific lang
+|
+| [return : void]
+|------------------------------------------------------
 '
 function verify_parameters()
 {
-    local arguments=("$1" "$2" "$3")
+    local arguments=("$1" "$2" "$3" "$4")
 
     case "${arguments[0]}" in
-        '-h') printf "%s\n" 'Usage: bash <script.sh> <doxygen_file_directory> [--replace]' && exit ;;
         '-d')
                 if [ ! -z "${arguments[1]}" ] && [ -d "${arguments[1]}" ]; then
                     _replace_status "${arguments[@]}"
                 fi
 
                 if [ ! -d "${arguments[1]}" ]; then
+                    arguments[3]="${arguments[2]}"
                     arguments[2]="${arguments[1]}"
 
                     read_doxyfile_path; arguments[1]=${__}
                     _replace_status "${arguments[@]}"
                 fi
             ;;
-        '--replace')
-                arguments[3]=${arguments[0]}
-                arguments[0]=${arguments[1]}
-                arguments[1]=${arguments[2]}
-                arguments[2]=${arguments[3]}
-
-                verify_parameters "${arguments[@]}"
-            ;;
+        *) printf "%s\n" 'Usage: bash <script.sh> <doxygen_file_directory> [--replace] [<lang-country>]' && exit ;;
     esac
 }
 
 : '
-|------------------------------------------------
+|------------------------------------------------------
+| [language]    English
 | [description] Read the doxygen location file
 |
-| [return]      [string] Doxygen location
-|------------------------------------------------
+| [return : string] Doxygen location
+|------------------------------------------------------
 '
 function read_doxyfile_path()
 {
@@ -96,17 +105,25 @@ function read_doxyfile_path()
 }
 
 : '
-|------------------------------------------------
+|------------------------------------------------------
+| [language]    English
 | [description] Entrypoint function
 |
-| [return]      [void]
-|------------------------------------------------
+| [param : string] $1 Parameter for input directory
+| [param : string] $2 Doxyfile directory
+| [param : string] $3 Parameter to override default
+|                     file settings
+| [param : string] $4 Optional parameter for exporting
+|                     documentation in a specific lang
+|
+| [return : void]
+|------------------------------------------------------
 '
 function main()
 {
-    local arguments=("$1" "$2" "$3")
+    local arguments=("$1" "$2" "$3" "$4")
 
     verify_parameters "${arguments[@]}"
 }
 
-main "$1" "$2" "$3"
+main "$1" "$2" "$3" "$4"

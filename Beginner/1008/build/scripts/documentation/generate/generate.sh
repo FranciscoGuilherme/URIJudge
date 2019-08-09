@@ -4,48 +4,83 @@ source "$(pwd)"/common/logger.sh
 source "$(pwd)"/generate/parameters.sh
 
 : '
-|------------------------------------------------
-| [description] Create new doxyfile based on a
-|               specific directory
+|------------------------------------------------------
+| [language]    English
+| [description] Create new doxyfile based on a specific
+|               directory
 |
-| [return]      [void]
-|------------------------------------------------
+| [param  : string] $1 Doxyfile directory
+| [param  : string] $2 Flag to override default settings
+| [param  : string] $3 Language to export documentation
+|
+| [return : void]
+|------------------------------------------------------
 '
 function create_doxyfile()
 {
     local doxyfile_directory="$1"
-    local replace="$2"
+    local doxyfile_replace="$2"
+    local doxyfile_language="$3"
 
     if [ ! -z "$doxyfile_directory" ] && [ -d "$doxyfile_directory" ]; then
         cd "$doxyfile_directory"
 
+        doxygen -d _PT_BR
         doxygen -g "$doxyfile_directory"/Doxyfile
 
-        if [ "$replace" == '1' ]; then
-            replace_configurations Doxyfile "$doxyfile_directory"
+        if [ "$doxyfile_replace" == '1' ]; then
+            replace_configurations "$doxyfile_directory" Doxyfile
         fi
 
+        set_language "$doxyfile_directory" Doxyfile "$3"
+
         doxygen "$doxyfile_directory"/Doxyfile
-    else
-        exit
     fi
 }
 
 : '
-|------------------------------------------------
-| [description] Searches for a particular setting
-|               in the doxygen file and how it is
-|               activated by string substitution
+|------------------------------------------------------
+| [language]    English
+| [description] Searches for a specific setting in the
+|               doxygen file and overrides the default
+|               settings
 |
-| [return]      [void]
-|------------------------------------------------
+| [param : string] $1 Doxyfile directory
+| [param : string] $2 Doxygen configuration file name
+|
+| [return : void]
+|------------------------------------------------------
 '
 function replace_configurations()
 {
-    local file="$1"
-    local doxyfile_directory="$2"
+    local doxyfile_directory="$1"
+    local doxyfile_file_name="$2"
 
     for configuration in "${CONFIG[@]}"; do
-        sed -i 's/^'"$configuration"'.*NO$/'"$configuration"' = YES/g' "$doxyfile_directory"/"$file"
+        sed -i 's/^'"$configuration"'.*NO$/'"$configuration"' = YES/g' "$doxyfile_directory"/"$doxyfile_file_name"
     done
+}
+
+: '
+|------------------------------------------------------
+| [language]    English
+| [description] Set output language for doxyfile
+|
+| [param : string] $1 Doxyfile directory
+| [param : string] $2 Doxygen configuration file name
+| [param : string] $3 Documentation language
+|
+| [return : void]
+|------------------------------------------------------
+'
+function set_language()
+{
+    local doxyfile_directory="$1"
+    local doxyfile_file_name="$2"
+    local doxyfile_language="$3"
+
+    case "$doxyfile_language" in
+        '_PT_BR') sed -i 's/^OUTPUT_LANGUAGE.*$/OUTPUT_LANGUAGE = Portuguese/g' "$doxyfile_directory"/"$doxyfile_file_name" ;;
+        *)        sed -i 's/^OUTPUT_LANGUAGE.*$/OUTPUT_LANGUAGE = English/g' "$doxyfile_directory"/"$doxyfile_file_name" ;;
+    esac
 }

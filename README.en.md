@@ -1,6 +1,5 @@
-# Exercise 1007
-
-> Beginner Category
+# URIJudge
+:coffee: C language solutions of URI Online Judge problems
 
 - [Requirements](#requirements)
 - [Generating executable and documentation](#executable)

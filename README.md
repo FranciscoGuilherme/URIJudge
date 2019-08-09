@@ -22,7 +22,12 @@
     - __doxygen__ para gerar a documentação do projeto através de
       comentários codificados nos arquivos de código
     - __cpputest__ para a codificação dos testes do projeto
-    -
+- Importante:
+    - Caso você encontre erros ao usar o _doxygen_ referente à ferramenta
+      _graphviz_ por não ter sido encontrada, execute:
+      ``` sh
+      $ sudo apt-get install graphviz
+      ```
 
 ### <span id='instalacao'>Guia de instalação</span>
 
@@ -52,7 +57,7 @@
 - Cada exercício possui sua própria documentação
 - Atualmente o projeto possui a seguinte lista de línguas suportadas
 - O comando de compilação tem como opção a especificação de um idioma
-  para extração da documentação através do argumento __LANGUAGE=<language>__
+  para extração da documentação através do argumento __LANGUAGE__
 - Abaixo a lista de idiomas suportados atualmente:
     - `_PT_BR`: Português
     - `_EN_US`: Inglês
@@ -65,8 +70,14 @@
 ``` sh
 $ make build.program [LANGUAGE=<language>]
 ```
-- Caso não queira que o processo de gerar a documentação pare, será
-  necessário a configuração de uma variável de ambiente
+- Exemplos:
+``` sh
+$ make build.program
+$ make build.program LANGUAGE=_PT_BR
+```
+- Caso não queira que o processo de gerar a documentação pare,
+  solicitando o caminho absoluto dos arquivos de um exercício
+  (localizado em src/), siga as instruções abaixo:
     - Adicione a variável PROJECT_DIR no arquivo ~/.bashrc com o
       caminho completo do diretório src/ do exercício
         ``` sh

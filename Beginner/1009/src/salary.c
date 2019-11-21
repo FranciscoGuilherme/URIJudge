@@ -15,7 +15,7 @@
 
 void input(char **name, double *number, double *sales)
 {
-    *name = calloc(100, sizeof(char));
+    *name = (char *) calloc(100, sizeof(char));
 
     fscanf(stdin, "%s%*c", *name);
     fscanf(stdin, "%lf%*c", number);

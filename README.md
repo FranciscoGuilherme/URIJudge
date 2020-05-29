@@ -35,6 +35,7 @@
       Ubuntu e Elementary, basta executar os comandos:
       ``` sh
       $ sudo apt-get update
+      $ sudo apt-get install libswitch-perl
       $ sudo apt-get install build-essential
       $ sudo apt-get install valgrind
       $ sudo apt-get install doxygen

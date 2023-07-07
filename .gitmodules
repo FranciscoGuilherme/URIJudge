@@ -25,3 +25,6 @@
 [submodule "Beginner/1009/make"]
 	path = Beginner/1009/make
 	url = git@github.com:FranciscoGuilherme/URIJudge-submodules.git
+[submodule "Beginner/1021/make"]
+	path = Beginner/1021/make
+	url = git@github.com:FranciscoGuilherme/URIJudge-submodules.git
